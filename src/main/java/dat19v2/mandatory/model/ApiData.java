@@ -12,6 +12,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @Data
@@ -51,10 +52,9 @@ public class ApiData
     @JoinColumn(name = "sysId")
     private Sys sys;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "weatherId")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
+    @OneToMany(cascade=CascadeType.ALL)
+    @JoinTable(name="ApiData_Weather", joinColumns={@JoinColumn(name="apiDataId", referencedColumnName="apiDataId")},
+            inverseJoinColumns={@JoinColumn(name="weatherId", referencedColumnName="weatherId")})
     private List<Weather> weatherList = new ArrayList<>();
 
     @OneToOne(fetch = FetchType.LAZY)

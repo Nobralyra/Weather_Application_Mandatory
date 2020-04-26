@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.List;
+
 @Service
 @Component
 public class AllDataOpenWeatherService implements IAllDataOpenWeatherService
@@ -71,25 +73,16 @@ public class AllDataOpenWeatherService implements IAllDataOpenWeatherService
         System.out.println(apiDataDTO.toString());
         System.out.println(apiDataDTO.getCloudsDTO());
         System.out.println(apiDataDTO.getWeatherDTOList().get(0));
+
         ApiData apiData = iApiDataMapper.apiDataDTOToApiData(apiDataDTO);
 
         iSaveApiCloudsService.save(apiData.getClouds());
         iSaveApiCoordService.save(apiData.getCoord());
         iSaveApiMainModelService.save(apiData.getMainModel());
         iSaveApiSysService.save(apiData.getSys());
-        iSaveApiWeatherService.save(apiData.getWeather().get(0));
+        iSaveApiWeatherService.save(apiData.getWeatherList().get(0));
         iSaveApiWindService.save(apiData.getWind());
         iSaveApiDataService.save(apiData);
-
-
-
-
-
-
-
-
-
-
         return apiDataDTO;
     }
 }

@@ -30,9 +30,6 @@ public class Weather
     private String icon;
     private String main;
 
-    @ManyToOne
-    private ApiData apiData;
-
     @Column(name = "CreatedDate", updatable=false)
     @CreationTimestamp
     private Timestamp createdDate;
