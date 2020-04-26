@@ -18,9 +18,8 @@ import lombok.NoArgsConstructor;
 public class SysDTO
 {
     private String country;
-    private long id;
-    private double message;
-    private long sunrise;
-    private long sunset;
-    private long type;
+    private Long id;
+    private Long sunrise;
+    private Long sunset;
+    private Long type;
 }

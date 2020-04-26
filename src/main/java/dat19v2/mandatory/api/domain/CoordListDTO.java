@@ -1,9 +1,10 @@
-
 package dat19v2.mandatory.api.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 /**
  * @Data
@@ -12,11 +13,9 @@ import lombok.NoArgsConstructor;
  * https://projectlombok.org/features/all
  */
 @Data
-@SuppressWarnings("unused")
 @AllArgsConstructor
 @NoArgsConstructor
-public class CoordDTO
+public class CoordListDTO
 {
-    private Long lat;
-    private Long lon;
+    List<CoordDTO> coordDTOList;
 }

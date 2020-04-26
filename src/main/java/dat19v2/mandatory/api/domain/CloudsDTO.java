@@ -1,6 +1,7 @@
 
 package dat19v2.mandatory.api.domain;
 
+import dat19v2.mandatory.model.ApiData;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,5 +18,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CloudsDTO
 {
-    private long all;
+    private Long all;
 }
