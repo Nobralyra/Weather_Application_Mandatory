@@ -1,9 +1,6 @@
 package dat19v2.mandatory.controllers;
 
-import dat19v2.mandatory.api.domain.ApiDataDTO;
-import dat19v2.mandatory.api.domain.ApiDataListDTO;
-import dat19v2.mandatory.api.domain.CloudsDTO;
-import dat19v2.mandatory.api.domain.CloudsListDTO;
+import dat19v2.mandatory.api.domain.*;
 import dat19v2.mandatory.services.view.IApiDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,8 +24,14 @@ public class ViewDataController
     public String getApiDataList(Model model)
     {
 
-        ArrayList<ApiDataListDTO> apiDataListDTO = iApiDataService.getApiDataListDTO();
-        model.addAttribute("apiDataAll", cloudsListDTO);
+        ApiDataListDTO apiDataListDTO = iApiDataService.getApiDataListDTO();
+        ApiDataDTO apiDataDTO = apiDataListDTO.getApiDataDTOList().get(0);
+        WeatherDTO weatherDTO = apiDataDTO.getWeatherDTOList().get(0);
+        String img = apiDataDTO.getWeatherDTOList().get(0).getIcon();
+        double windDTO = apiDataDTO.getWindDTO().getDeg();
+        model.addAttribute("img", img);
+        model.addAttribute("windDTO", windDTO);
+        model.addAttribute("weatherDTO", weatherDTO);
         return "weather";
     }
 }

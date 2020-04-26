@@ -31,8 +31,16 @@ public class ApiDataService implements IApiDataService
 
 
     @Override
-    public ApiDataDTO getApiDataDTO()
+    public ApiDataListDTO getApiDataListDTO()
     {
-
+        List<ApiDataDTO> apiDataDTOS = iApiDataRepository
+                .findAll()
+                .stream()
+                .map(apiData -> {
+                    ApiDataDTO apiDataDTO = iApiDataMapper.apiDataToApiDataDTO(apiData);
+                    return apiDataDTO;
+                })
+                .collect(Collectors.toList());
+        return new ApiDataListDTO(apiDataDTOS);
     }
 }

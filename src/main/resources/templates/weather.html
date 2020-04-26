@@ -17,9 +17,10 @@
             <th>Geo coords</th>
             <th></th>
         </tr>
-        <tr th:each="ApiDataAll : ${apiDataAll}">
-            <td th:text="${ApiDataAll.ApiDataListDTO}"></td>
-
+        <tr>
+            <img th:src="@{${'http://openweathermap.org/img/wn/' + img + '@2x.png'}}"/>
+            <td th:text="${windDTO}"></td>
+            <td th:text="${weatherDTO.getDescription()}"></td>
             <td>
         </tr>
     </table>
