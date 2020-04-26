@@ -1,6 +1,7 @@
 
 package dat19v2.mandatory.api.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,6 @@ public class WeatherDTO
 {
     private String description;
     private String icon;
-    private long id;
+    private Long id;
     private String main;
 }

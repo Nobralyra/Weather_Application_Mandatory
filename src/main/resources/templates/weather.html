@@ -4,9 +4,26 @@
     <title>Title</title>
 </head>
 <body>
-<header th:replace="fragments/top_menu :: top_menuElement"></header>
+    <header th:replace="fragments/top_menu :: top_menuElement"></header>
 
+    <table>
+        <tr>
+            <th>Wind</th>
+            <th>Cloudiness</th>
+            <th>Pressure</th>
+            <th>Humidity</th>
+            <th>Sunrise</th>
+            <th>Sunset</th>
+            <th>Geo coords</th>
+            <th></th>
+        </tr>
+        <tr th:each="ApiDataAll : ${apiDataAll}">
+            <td th:text="${ApiDataAll.ApiDataListDTO}"></td>
 
-<footer th:replace="fragments/footer :: footerElement"></footer>
+            <td>
+        </tr>
+    </table>
+
+    <footer th:replace="fragments/footer :: footerElement"></footer>
 </body>
 </html>
