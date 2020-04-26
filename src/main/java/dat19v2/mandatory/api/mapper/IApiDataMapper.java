@@ -42,7 +42,6 @@ public interface IApiDataMapper
     @Mapping(target = "sysDTO.sunrise", source = "sys.sunrise")
     @Mapping(target = "sysDTO.sunset", source = "sys.sunset")
     @Mapping(target = "sysDTO.type", source = "sys.type")
-
     @Mapping(target = "windDTO.deg", source = "wind.deg")
     @Mapping(target = "windDTO.speed", source = "wind.speed")
     ApiDataDTO apiDataToApiDataDTO(ApiData apiData);
