@@ -10,6 +10,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.*;
+import java.util.Date;
 
 /**
  * @Data
@@ -26,8 +29,8 @@ public class Sys
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long sysId;
     private Long id;
-    private Long sunrise;
-    private Long sunset;
+    private ZonedDateTime sunrise;
+    private ZonedDateTime sunset;
     private Long type;
     private String country;
 

@@ -1,6 +1,7 @@
 
 package dat19v2.mandatory.api.domain;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +29,7 @@ public class ApiDataDTO
     private Long dt;
     private Long id;
     private Long visibility;
+    private Timestamp createdDate;
     @JsonProperty("main")
     private MainDTO mainDTO;
     private String name;
@@ -188,7 +190,7 @@ public class ApiDataDTO
     {
         return visibility;
     }
-
+    @JsonProperty("visibility")
     public void setVisibility(long visibility)
     {
         this.visibility = visibility;

@@ -6,24 +6,45 @@
 <body>
     <header th:replace="fragments/top_menu :: top_menuElement"></header>
 
-    <table>
-        <tr>
-            <th>Wind</th>
-            <th>Cloudiness</th>
-            <th>Pressure</th>
-            <th>Humidity</th>
-            <th>Sunrise</th>
-            <th>Sunset</th>
-            <th>Geo coords</th>
-            <th></th>
-        </tr>
-        <tr>
-            <img th:src="@{${'http://openweathermap.org/img/wn/' + img + '@2x.png'}}"/>
-            <td th:text="${windDTO}"></td>
-            <td th:text="${weatherDTO.getDescription()}"></td>
-            <td>
-        </tr>
-    </table>
+    <div class="container">
+        <h1 th:text="'Weather in ' + ${apiDataListDTO.apiDataDTOList.get(0).name} + ', DK'"></h1>
+        <img th:src="@{${'http://openweathermap.org/img/wn/' + apiDataListDTO.apiDataDTOList.get(0).getWeatherDTOList().get(0).icon + '@2x.png'}}"/>
+        <h3 th:text="${apiDataListDTO.apiDataDTOList.get(0).mainDTO.temp} + ' &#8451;'"></h3>
+        <div th:text="${apiDataListDTO.apiDataDTOList.get(0).createdDate.toLocaleString()}"></div>
+        <table class="table table-sm table-striped" style="width: auto">
+            <tbody>
+            <tr th:each="windDegAndSpeed : ${apiDataListDTO.apiDataDTOList}">
+                <th scope="row">Wind</th>
+                <td th:text="${windDegAndSpeed.getWindDTO().deg} + ' wind degrees' + ' ' + ${windDegAndSpeed.getWindDTO().speed} + ' m/s'"></td>
+            </tr>
+            <tr th:each="weatherDescription : ${apiDataListDTO.apiDataDTOList}">
+                <th scope="row">Weather</th>
+                <td th:text="${weatherDescription.getWeatherDTOList().get(0).description}"></td>
+            </tr>
+            <tr th:each="mainPressure : ${apiDataListDTO.apiDataDTOList}">
+                <th scope="row">Pressure</th>
+                <td th:text="${mainPressure.getMainDTO().pressure} + ' hpa'"></td>
+            </tr>
+            <tr th:each="mainHumidity : ${apiDataListDTO.apiDataDTOList}">
+                <th scope="row">Humidity</th>
+                <td th:text="${mainHumidity.getMainDTO().humidity}  + ' %'"></td>
+            </tr>
+            <tr th:each="sysSunrise : ${apiDataListDTO.apiDataDTOList}">
+                <th scope="row">Sunrise</th>
+                <td th:text="${sysSunrise.getSysDTO().sunrise.toString()}"></td>
+            </tr>
+            <tr th:each="sysSunset : ${apiDataListDTO.apiDataDTOList}">
+                <th scope="row">Sunset</th>
+                <td th:text="${sysSunset.getSysDTO().sunset.toString()}"></td>
+            </tr>
+            <tr th:each="coordLatAndLon : ${apiDataListDTO.apiDataDTOList}">
+            <th scope="row">Geo coords</th>
+            <td th:text="'[' + ${coordLatAndLon.getCoordDTO().lat} + ', ' + ${coordLatAndLon.getCoordDTO().lon} + ']'"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
 
     <footer th:replace="fragments/footer :: footerElement"></footer>
 </body>

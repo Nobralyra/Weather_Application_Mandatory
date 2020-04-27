@@ -3,9 +3,11 @@ package dat19v2.mandatory.services.view;
 import dat19v2.mandatory.api.domain.ApiDataDTO;
 import dat19v2.mandatory.api.domain.ApiDataListDTO;
 import dat19v2.mandatory.api.mapper.IApiDataMapper;
-import dat19v2.mandatory.model.Clouds;
 import dat19v2.mandatory.repositories.IApiDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -31,10 +33,28 @@ public class ApiDataService implements IApiDataService
 
 
     @Override
-    public ApiDataListDTO getApiDataListDTO()
+    public ApiDataListDTO getApiDataListDTO(Integer firstPageNumber, Integer pageSize, String sortBy)
     {
+        Pageable firstPaging = PageRequest.of(firstPageNumber, pageSize, Sort.by("createdDate").descending());
+
         List<ApiDataDTO> apiDataDTOS = iApiDataRepository
-                .findAll()
+                .findAll(firstPaging)
+                .stream()
+                .map(apiData -> {
+                    ApiDataDTO apiDataDTO = iApiDataMapper.apiDataToApiDataDTO(apiData);
+                    return apiDataDTO;
+                })
+                .collect(Collectors.toList());
+        return new ApiDataListDTO(apiDataDTOS);
+    }
+
+    @Override
+    public ApiDataListDTO getLast5ApiDataListDTO(Integer pageNumber, Integer pageSize, String sortBy)
+    {
+        Pageable fivePaging = PageRequest.of(pageNumber, pageSize, Sort.by("createdDate").descending());
+
+        List<ApiDataDTO> apiDataDTOS = iApiDataRepository
+                .findAll(fivePaging)
                 .stream()
                 .map(apiData -> {
                     ApiDataDTO apiDataDTO = iApiDataMapper.apiDataToApiDataDTO(apiData);

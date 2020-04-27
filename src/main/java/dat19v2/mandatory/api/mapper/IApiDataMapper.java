@@ -18,6 +18,8 @@ public interface IApiDataMapper
     @Mapping(target = "dt", source = "dt")
     @Mapping(target = "cod", source = "cod")
     @Mapping(target = "base", source = "base")
+    @Mapping(target = "visibility", source = "visibility")
+    @Mapping(target = "createdDate", source = "createdDate")
     @Mapping(target = "apiDataUrl", source = "")
 
 

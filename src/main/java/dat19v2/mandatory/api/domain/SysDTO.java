@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.ZonedDateTime;
+
 /**
  * @Data
  * All together now: A shortcut for @ToString, @EqualsAndHashCode, @Getter on all fields,
@@ -19,7 +21,7 @@ public class SysDTO
 {
     private String country;
     private Long id;
-    private Long sunrise;
-    private Long sunset;
+    private ZonedDateTime sunrise;
+    private ZonedDateTime sunset;
     private Long type;
 }

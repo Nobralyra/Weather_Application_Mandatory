@@ -25,8 +25,8 @@ public class Coord
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long coordId;
-    private Long lat;
-    private Long lon;
+    private double lat;
+    private double lon;
 
     @OneToOne(fetch = FetchType.LAZY,
             cascade =  CascadeType.ALL,

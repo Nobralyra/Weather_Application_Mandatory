@@ -17,6 +17,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CoordDTO
 {
-    private Long lat;
-    private Long lon;
+    private double lat;
+    private double lon;
 }

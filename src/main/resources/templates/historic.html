@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: headerElement">
+    <title>Title</title>
+</head>
+<body>
+<header th:replace="fragments/top_menu :: top_menuElement"></header>
+
+<div class="container">
+    <h1 th:text="'Historic Weather in ' + ${historicLast5ApiDataListDTO.apiDataDTOList.get(0).name} + ', DK'"></h1>
+    <div class="d-inline-flex p-2 bd-highlight">
+    <table class="table table-sm">
+        <tbody>
+        <tr th:each="HistoricLast5ApiDataListDTO : ${historicLast5ApiDataListDTO.apiDataDTOList}">
+
+            <td th:text="${HistoricLast5ApiDataListDTO.createdDate.toLocaleString()}"></td>
+            <td th:text="${HistoricLast5ApiDataListDTO.mainDTO.temp} + ' &#8451;'"></td>
+            <td><img th:src="@{${'http://openweathermap.org/img/wn/' + HistoricLast5ApiDataListDTO.getWeatherDTOList().get(0).icon + '@2x.png'}}"/></td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+
+
+
+<footer th:replace="fragments/footer :: footerElement"></footer>
+</body>
+</html>

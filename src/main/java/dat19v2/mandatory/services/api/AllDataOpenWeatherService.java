@@ -62,12 +62,12 @@ public class AllDataOpenWeatherService implements IAllDataOpenWeatherService
         UriComponentsBuilder uriBuilder = UriComponentsBuilder
                 .fromUriString(api_url)
                 .queryParam("id", 2618425)
-                .queryParam("appid", "c296fe19c765289ba2b1f4ce756b35ad");
+                .queryParam("appid", "c296fe19c765289ba2b1f4ce756b35ad")
+                .queryParam("units", "metric");
 
-        String test = "{\"coord\":{\"lon\":12.57,\"lat\":55.68},\"weather\":[{\"id\":803,\"main\":\"Clouds\",\"description\":\"broken clouds\",\"icon\":\"04d\"}],\"base\":\"stations\",\"main\":{\"temp\":283.23,\"feels_like\":275.82,\"temp_min\":282.15,\"temp_max\":284.26,\"pressure\":1016,\"humidity\":66},\"visibility\":10000,\"wind\":{\"speed\":8.7,\"deg\":290},\"clouds\":{\"all\":59},\"dt\":1586943853,\"sys\":{\"type\":1,\"id\":1575,\"country\":\"DK\",\"sunrise\":1586923432,\"sunset\":1586974502},\"timezone\":7200,\"id\":2618425,\"name\":\"Copenhagen\",\"cod\":200}";
-
-        ApiDataDTO apiDataDTO = new ObjectMapper().readerFor(ApiDataDTO.class).readValue(test);
-        //ApiDataDTO apiDataDTO = restTemplate.getForObject(uriBuilder.toUriString(), ApiDataDTO.class);
+        String test ="{\"coord\":{\"lon\":12.57,\"lat\":55.68},\"weather\":[{\"id\":803,\"main\":\"Clouds\",\"description\":\"broken clouds\",\"icon\":\"04d\"}],\"base\":\"stations\",\"main\":{\"temp\":283.53,\"feels_like\":278.9,\"temp_min\":283.15,\"temp_max\":283.71,\"pressure\":1005,\"humidity\":81},\"visibility\":10000,\"wind\":{\"speed\":5.7,\"deg\":170},\"clouds\":{\"all\":63},\"dt\":1588012669,\"sys\":{\"type\":1,\"id\":1575,\"country\":\"DK\",\"sunrise\":1587958507,\"sunset\":1588012753},\"timezone\":7200,\"id\":2618425,\"name\":\"Copenhagen\",\"cod\":200}";
+        //ApiDataDTO apiDataDTO = new ObjectMapper().readerFor(ApiDataDTO.class).readValue(test);
+        ApiDataDTO apiDataDTO = restTemplate.getForObject(uriBuilder.toUriString(), ApiDataDTO.class);
 
         assert apiDataDTO != null;
         System.out.println(apiDataDTO.toString());
