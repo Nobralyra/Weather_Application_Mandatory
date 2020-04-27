@@ -22,14 +22,12 @@ public interface IApiDataMapper
     @Mapping(target = "createdDate", source = "createdDate")
     @Mapping(target = "apiDataUrl", source = "")
 
-
     @Mapping(target = "cloudsDTO", source = "clouds")
     @Mapping(target = "coordDTO", source = "coord")
     @Mapping(target = "mainDTO", source = "mainModel")
     @Mapping(target = "sysDTO", source = "sys")
     @Mapping(target = "weatherDTOList", source = "weatherList")
     @Mapping(target = "windDTO", source = "wind")
-
 
     @Mapping(target = "cloudsDTO.all", source = "clouds.all")
     @Mapping(target = "coordDTO.lat", source = "coord.lat")
