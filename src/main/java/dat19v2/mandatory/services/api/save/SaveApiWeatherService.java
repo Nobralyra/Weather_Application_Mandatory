@@ -17,7 +17,6 @@ public class SaveApiWeatherService implements ISaveOpenWeatherService<Weather>
     @Override
     public void save(Weather weather)
     {
-        System.out.println(weather);
         iWeatherRepository.save(weather);
     }
 }

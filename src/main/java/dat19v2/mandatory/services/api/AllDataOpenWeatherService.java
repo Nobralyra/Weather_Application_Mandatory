@@ -15,6 +15,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+/**
+ * Service that calls OpenWeatherApi, returns JSON and calls ISaveOpenWeatherService to save JSON objects
+ */
 @Service
 @Component
 public class AllDataOpenWeatherService implements IAllDataOpenWeatherService
@@ -53,6 +56,21 @@ public class AllDataOpenWeatherService implements IAllDataOpenWeatherService
         this.iApiDataMapper = iApiDataMapper;
     }
 
+    /**
+     * Get called by RestApiDataController getApiDataList(), and calls the OpenWeatherApi with restTemplate.getforObject
+     * so the returned JSON can be loaded into ApiDataDTO object.
+     * To save the ApiDataDTO we uses the generated-source code that @IApiDataMapper (@Mapper) has generated, where
+     * it maps the DTO classes to there respective Entity classes.
+     *
+     * It then calls the respective Entity classes services save methods to get the data saved.
+     * apiData needs to be saved last because it is the owner entity. With Weather it is a little bit different
+     * because it weather is a list, so ApiData has an @OnetoMany relationship with a @JoinTable with the id from
+     * Weather and ApiData in it.
+     *
+     * We returns the ApiDataDTO, so the RestApiDataController can display our JSON.
+     * @return ApiDataDTO
+     * @throws JsonProcessingException
+     */
     @Scheduled(fixedRateString = "600000")
     @Override
     public ApiDataDTO getAllOpenWeatherData() throws JsonProcessingException
