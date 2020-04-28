@@ -2,6 +2,7 @@ package dat19v2.mandatory.controllers;
 
 import dat19v2.mandatory.api.domain.*;
 import dat19v2.mandatory.services.view.IApiDataService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ViewDataController
 {
+    @Autowired
     private final IApiDataService iApiDataService;
 
     public ViewDataController(IApiDataService iApiDataService)
@@ -20,12 +22,15 @@ public class ViewDataController
     }
 
     /**
-     * Return what the weather is right now in a list
+     * Return what the weather is right now in a list.
+     * It calls the iApiDataService.getApiDataListDTO() that has been implemented by ApiDataService
+     *
+     * On the HTML we use Thymeleaf to fetch out values from the DTO fields and display them
      * @param model
      * @return String
      */
     @GetMapping({"", "/", "/weather"})
-    public String getApiDataList(Model model)
+    public String getApiDataListDTO(Model model)
     {
         ApiDataListDTO apiDataListDTO = iApiDataService.getApiDataListDTO();
 
@@ -35,6 +40,9 @@ public class ViewDataController
 
     /**
      * Return what the weather was for the last 5 inserts in the database in a list
+     * It calls the iApiDataService.getLast5ApiDataListDTO() that has been implemented by ApiDataService
+     *
+     * On the HTML we use Thymeleaf to fetch out values from the DTO fields and display them
      * @param model
      * @return String
      */

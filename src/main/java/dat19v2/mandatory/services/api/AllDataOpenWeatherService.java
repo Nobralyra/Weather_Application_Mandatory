@@ -16,7 +16,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 /**
- * Service that calls OpenWeatherApi, returns JSON and calls ISaveOpenWeatherService to save JSON objects
+ * Service for REST API that calls OpenWeatherApi, returns JSON and calls ISaveOpenWeatherService to save JSON objects
  */
 @Service
 @Component
