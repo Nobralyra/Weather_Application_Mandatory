@@ -19,6 +19,8 @@ import java.util.stream.Collectors;
 public class ApiDataService implements IApiDataService
 {
     private final IApiDataRepository iApiDataRepository;
+    Integer pageNumber = 0;
+    Integer pageSize;
 
     @Autowired
     private final IApiDataMapper iApiDataMapper;
@@ -30,9 +32,10 @@ public class ApiDataService implements IApiDataService
     }
 
     @Override
-    public ApiDataListDTO getApiDataListDTO(Integer firstPageNumber, Integer pageSize, String sortBy)
+    public ApiDataListDTO getApiDataListDTO()
     {
-        Pageable firstPaging = PageRequest.of(firstPageNumber, pageSize, Sort.by("createdDate").descending());
+        pageSize = 1;
+        Pageable firstPaging = PageRequest.of(pageNumber, pageSize, Sort.by("createdDate").descending());
 
         List<ApiDataDTO> apiDataDTOS = iApiDataRepository
                 .findAll(firstPaging)
@@ -46,8 +49,9 @@ public class ApiDataService implements IApiDataService
     }
 
     @Override
-    public ApiDataListDTO getLast5ApiDataListDTO(Integer pageNumber, Integer pageSize, String sortBy)
+    public ApiDataListDTO getLast5ApiDataListDTO()
     {
+        pageSize = 5;
         Pageable fivePaging = PageRequest.of(pageNumber, pageSize, Sort.by("createdDate").descending());
 
         List<ApiDataDTO> apiDataDTOS = iApiDataRepository
