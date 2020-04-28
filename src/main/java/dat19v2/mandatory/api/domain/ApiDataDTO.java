@@ -1,4 +1,3 @@
-
 package dat19v2.mandatory.api.domain;
 
 import java.sql.Timestamp;

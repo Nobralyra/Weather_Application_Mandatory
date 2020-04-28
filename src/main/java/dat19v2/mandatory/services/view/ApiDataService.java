@@ -11,7 +11,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,13 +23,11 @@ public class ApiDataService implements IApiDataService
     @Autowired
     private final IApiDataMapper iApiDataMapper;
 
-
     public ApiDataService(IApiDataRepository iApiDataRepository, IApiDataMapper iApiDataMapper)
     {
         this.iApiDataRepository = iApiDataRepository;
         this.iApiDataMapper = iApiDataMapper;
     }
-
 
     @Override
     public ApiDataListDTO getApiDataListDTO(Integer firstPageNumber, Integer pageSize, String sortBy)

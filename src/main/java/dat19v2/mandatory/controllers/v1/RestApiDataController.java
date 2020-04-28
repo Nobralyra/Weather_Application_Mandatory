@@ -28,8 +28,4 @@ public class RestApiDataController
     {
         return iAllDataOpenWeatherService.getAllOpenWeatherData();
     }
-
-
-
-
 }
