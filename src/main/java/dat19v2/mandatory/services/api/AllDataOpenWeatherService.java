@@ -15,8 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.List;
-
 @Service
 @Component
 public class AllDataOpenWeatherService implements IAllDataOpenWeatherService
@@ -59,20 +57,13 @@ public class AllDataOpenWeatherService implements IAllDataOpenWeatherService
     @Override
     public ApiDataDTO getAllOpenWeatherData() throws JsonProcessingException
     {
-        UriComponentsBuilder uriBuilder = UriComponentsBuilder
-                .fromUriString(api_url)
-                .queryParam("id", 2618425)
-                .queryParam("appid", "c296fe19c765289ba2b1f4ce756b35ad")
-                .queryParam("units", "metric");
+        UriComponentsBuilder uriBuilder = getUriComponentsBuilder();
 
         String test ="{\"coord\":{\"lon\":12.57,\"lat\":55.68},\"weather\":[{\"id\":803,\"main\":\"Clouds\",\"description\":\"broken clouds\",\"icon\":\"04d\"}],\"base\":\"stations\",\"main\":{\"temp\":283.53,\"feels_like\":278.9,\"temp_min\":283.15,\"temp_max\":283.71,\"pressure\":1005,\"humidity\":81},\"visibility\":10000,\"wind\":{\"speed\":5.7,\"deg\":170},\"clouds\":{\"all\":63},\"dt\":1588012669,\"sys\":{\"type\":1,\"id\":1575,\"country\":\"DK\",\"sunrise\":1587958507,\"sunset\":1588012753},\"timezone\":7200,\"id\":2618425,\"name\":\"Copenhagen\",\"cod\":200}";
         //ApiDataDTO apiDataDTO = new ObjectMapper().readerFor(ApiDataDTO.class).readValue(test);
         ApiDataDTO apiDataDTO = restTemplate.getForObject(uriBuilder.toUriString(), ApiDataDTO.class);
 
         assert apiDataDTO != null;
-        System.out.println(apiDataDTO.toString());
-        System.out.println(apiDataDTO.getCloudsDTO());
-        System.out.println(apiDataDTO.getWeatherDTOList().get(0));
 
         ApiData apiData = iApiDataMapper.apiDataDTOToApiData(apiDataDTO);
 
@@ -84,5 +75,18 @@ public class AllDataOpenWeatherService implements IAllDataOpenWeatherService
         iSaveApiWindService.save(apiData.getWind());
         iSaveApiDataService.save(apiData);
         return apiDataDTO;
+    }
+
+    /**
+     * Method that makes the uri with url (api_url) and urn (id, appid, units)
+     * @return UriComponentsBuilder
+     */
+    private UriComponentsBuilder getUriComponentsBuilder()
+    {
+        return UriComponentsBuilder
+                    .fromUriString(api_url)
+                    .queryParam("id", 2618425)
+                    .queryParam("appid", "c296fe19c765289ba2b1f4ce756b35ad")
+                    .queryParam("units", "metric");
     }
 }
